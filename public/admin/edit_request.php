@@ -49,7 +49,7 @@
 
 		
 		//validations
-		$required_fields = array("name", "email", "district", "start_date");
+		$required_fields = array("name", "email", "district", "start_date", "robot");
 		$utils->validate_required($required_fields);
 		
 		if (empty($utils->errors)) {
@@ -152,7 +152,7 @@
 			<div class="form-group">
 				<label for="robot">Robot Type</label>
 				<select class="form-control" name="robot" id="robot">
-					<option value="0">Choose a Robot</option>
+					<option value="">Choose a Robot</option>
 					<?php 
 					//loop over the database values 
 					while ($row = mysqli_fetch_assoc($qryRobots)) {
