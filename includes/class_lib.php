@@ -143,7 +143,7 @@
 				//build the query
 				$qry = "SELECT rq.id, rq.requestor, rq.gradeLevel, rq.district, rq.start_date, rq.end_date, rq.robotID, rb.title, rb.color, rq.approved ";
 				$qry .= "FROM tbl_requests rq ";
-				$qry .= "INNER JOIN tbl_Robots rb ";
+				$qry .= "INNER JOIN tbl_robots rb ";
 				$qry .= "ON rb.id = rq.robotID ";
 				$qry .= "WHERE rq.approved = 1 ";
 				$qry .= "AND rq.start_date BETWEEN '" . $start. "' AND '" . $end . "'";

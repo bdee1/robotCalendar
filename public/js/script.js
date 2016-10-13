@@ -12,7 +12,11 @@ $(document).ready(function() {
     if (jQuery().datetimepicker) {
 	    //initialize the datepickers
 	    $('.datetimepicker').datetimepicker({
-		    format: 'L'
+		    format: 'L',
+		    widgetPositioning: {
+			    horizontal: 'auto',
+			    vertical: 'top'
+		    }
 	    });
 	}
 	
