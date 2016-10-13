@@ -1,0 +1,37 @@
+body { background-color: #8499b8; }
+a {color: #d3e047;}
+
+h1 { color: #fff; }
+.container h1 { color: initial; }
+
+.cal-header { margin-bottom: 1em; }
+
+.responsive-calendar, .container { background-color: #fff; }
+
+.container { padding: 1em; border-radius: 10px; }
+.container a { color: blue; }
+.container a.btn { color: #fff; }
+
+.fc-event-container a { color: #fff;}
+
+ul.admin-nav {
+	list-style-type: none;
+	font-size: 1.3em;
+}
+
+ul.admin-nav i.fa {
+	margin-right: 10px;
+	width: 1em;
+}
+
+
+/* colorpicker styles */
+.colorpicker-2x .colorpicker-saturation { width: 200px; height: 200px;}
+.colorpicker-2x .colorpicker-hue, .colorpicker-2x .colorpicker-alpha { width: 30px; height: 200px;}
+.colorpicker-2x .colorpicker-color, .colorpicker-2x .colorpicker-color div { height: 30px; }
+
+
+.error {
+	background-color: #f2aac0;
+	border: 1px solid #ffffff;
+}
