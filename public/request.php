@@ -24,6 +24,7 @@
 		$end_date = $_POST["end_date"];
 		$robotType = $_POST["robot"];
 		
+		
 		//validations
 		$required_fields = array("name", "email", "district", "start_date", "robot");
 		$utils->validate_required($required_fields);
@@ -106,13 +107,13 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="start_date">Start Date</label>
-							<input type="text" class="form-control datetimepicker" name="start_date" id="start_date" placeholder="mm/dd/yyyy">
+							<input type="text" class="form-control datetimepicker" name="start_date" id="start_date" placeholder="mm/dd/yyyy" value="<?php echo $start_date; ?>">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="end_date">End Date</label>
-							<input type="text" class="form-control datetimepicker" name="end_date" id="end_date" placeholder="mm/dd/yyyy">
+							<input type="text" class="form-control datetimepicker" name="end_date" id="end_date" placeholder="mm/dd/yyyy" value="<?php echo $end_date; ?>">
 						</div>
 					</div>
 				</div>
