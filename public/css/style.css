@@ -24,6 +24,9 @@ ul.admin-nav i.fa {
 	width: 1em;
 }
 
+/* hide the honeypot field on forms */
+.form-test { display: none; }
+
 
 /* colorpicker styles */
 .colorpicker-2x .colorpicker-saturation { width: 200px; height: 200px;}

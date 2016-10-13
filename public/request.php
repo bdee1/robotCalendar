@@ -28,6 +28,7 @@
 		//validations
 		$required_fields = array("name", "email", "district", "start_date", "robot");
 		$utils->validate_required($required_fields);
+		$utils->validate_honeypot('lname');
 		
 		if (empty($utils->errors)) {
 			//process form
@@ -131,6 +132,11 @@
 						}
 						?>
 					</select>
+				</div>
+				
+				<div class="form-group form-test">
+					<label for="lname">Last Name</label>
+					<input type="text" class="form-control" name="lname" id="lname" placeholder="Enter your last name" value="">
 				</div>
 				
 				<button type="submit" name="submit" class="btn btn-primary">Submit Request</button>

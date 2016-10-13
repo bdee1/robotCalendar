@@ -459,6 +459,22 @@
 			}
 			
 			/*
+			*  validate_honeypot
+			*
+			*  check to make sure the honeypot field was not filled out
+			*
+			*  @param	$field - the name of the field to check
+			*  @return	N/A
+			*/
+			//
+			function validate_honeypot ($field) {
+				$value = trim($_POST[$field]);
+				if (isset($value) && $value != "") {
+					$this->errors[$field] = "Sorry the form could not be submitted at this time";
+				}
+			}
+			
+			/*
 			*  form_errors
 			*
 			*  build an html list of errord from form validaion.
