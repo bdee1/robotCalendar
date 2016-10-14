@@ -22,29 +22,31 @@
 	    <h1>Robots Reservation Calendar</h1>
 		<a href="request.php" class="btn btn-danger">Request a Robot for your district</a>
     </div>
-    <div class="container">
+    <div class="container calendar-container">
       <!-- Responsive calendar - START -->
     	<div class="responsive-calendar">
       </div>
       <!-- Responsive calendar - END -->
     </div>
     
-    <h2 class="text-center">Key</h2>
-    <div class="container " style="padding: 1em;">
+    <h2 class="text-center key-heading">Key</h2>
+    <div class="container key-container">
+	    <div class="row key-row">
 	    <?php 
 		//loop over the database values 
 			while ($row = mysqli_fetch_assoc($qryRobots)) {
 			?>
-				<div class="col-md-1" style="background-color: <?php echo $row["color"];?>">
+				<div class="col-xs-1 key-color" style="background-color: <?php echo $row["color"];?>">
 					&nbsp;
 				</div>
-				<div class="col-md-2">
+				<div class="col-sm-2 col-xs-11 key-label">
 					<?php echo $row["title"];?>
 				</div>
 				
 			<?php
 			}
 		?>
+	    </div>
     </div>
     <div class="text-center">
 	    <br>
