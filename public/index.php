@@ -22,7 +22,9 @@
   <body>
     <div class="text-center cal-header">
 	    <h1>Robots Reservation Calendar</h1>
-		<a href="request.php" class="btn btn-danger">Request a Robot for your district</a>
+		<a href="request.php" class="btn btn-danger">
+			<i class="fa fa-user-plus" aria-hidden="true"></i>Request a Robot for your district
+		</a>
     </div>
     <div class="container calendar-container">
       <!-- Responsive calendar - START -->
@@ -104,6 +106,7 @@
     <script src="js/fullCalendar/moment.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/fullCalendar/fullcalendar.min.js"></script>
+    <script src="https://use.fontawesome.com/ee44f3c44e.js"></script>
     <script src="js/script.js"></script>
     
   </body>
