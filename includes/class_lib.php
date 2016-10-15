@@ -164,7 +164,12 @@
 										"start"=>$row["start_date"],
 										"end"=>$row["end_date"],
 										"color"=>$row["color"],
-										"allDay"=>"true");
+										"allDay"=>"true",
+										"requestor"=>$row["requestor"],
+										"district"=>$row["district"],
+										"gradeLevel"=>$row["gradeLevel"],
+										"robot"=>$row["title"],
+										"eventid"=>$row["id"]);
 					
 					$arrevents[] = $arrevent;	
 				}

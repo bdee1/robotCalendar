@@ -1,5 +1,6 @@
 h1 { font-size: 28px; border-bottom: 1px solid #000; padding-bottom: .5em; margin-bottom: .75em; }
 h2 { font-size: 24px; }
+.bold {font-weight: bold;}
 .key-heading { border-bottom: 1px solid #000; padding-bottom: .5em;}
 
 .calendar-container { padding-top: .75em; }

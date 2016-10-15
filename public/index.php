@@ -3,6 +3,8 @@
 	require_once ("../includes/class_lib.php");
 	require_once ("../includes/dBug.php");
 	$qryRobots = $utils->getRobotTypes();
+	session_start();
+	
 ?>
 
 <html lang="en">
@@ -28,6 +30,51 @@
       </div>
       <!-- Responsive calendar - END -->
     </div>
+    
+    <!-- bootstrap modal for clicked calendar events -->
+    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="modal-title">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>
+		        <span class="bold">Date: </span>
+		        <span id="eventModalDate"></span>
+	        </p>
+	        <p>
+		        <span class="bold">Requestor: </span>
+		        <span id="eventModalRequestor"></span>
+	        </p>
+	        <p>
+		        <span class="bold">District: </span>
+		        <span id="eventModalDistrict"></span>
+	        </p>
+	        <p>
+		        <span class="bold">Grade Level: </span>
+		        <span id="eventModalGradeLevel"></span>
+	        </p>
+	        <p>
+		        <span class="bold">Robot: </span>
+		        <span id="eventModalRobot"></span>
+	        </p>
+	      </div>
+	      <div class="modal-footer">
+	        <?php
+		        //make sure the user is logged in
+				if (isset($_SESSION['admin_id'])) {
+				?>
+					<a id="eventModalEdit" class="btn btn-default" href="">Edit This Request</a>
+				<?php
+				}
+			?>
+			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
     
     <h2 class="text-center key-heading">Key</h2>
     <div class="container key-container">
