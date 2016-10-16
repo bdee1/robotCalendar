@@ -4,6 +4,8 @@
 	$qryRobots = $utils->getRobotTypes();
 	$message = "";
 	$submitted = false;
+	session_start();
+	
 	
 	$name = "";
 	$email = "";
@@ -146,7 +148,20 @@
 		?>	
 			<h2>Success!</h2>
 			<p>Your request has been submitted</p>
-			<a href="index.php"><< Go Back to the Calendar</a>
+			<?php
+		        //make sure the user is logged in
+				if (isset($_SESSION['admin_id'])) {
+				?>
+					<a href="./admin/admin.php"><< Go Back to the Admin Dashboard</a>
+				<?php
+				} else {
+					?>
+						<a href="index.php"><< Go Back to the Calendar</a>
+					<?php
+				}
+			?>
+
+			
 		<?php	
 			}
 		?>
