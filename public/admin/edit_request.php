@@ -70,7 +70,7 @@
     
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-colorpicker.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-datetimepicker.min.css" />
     <link href="../css/style.css" rel="stylesheet">
   </head>
   <body>
@@ -187,7 +187,7 @@
     <script src="../js/jquery.js"></script>
     <script src="../js/fullCalendar/moment.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootstrap-colorpicker.min.js"></script>
+    <script src="../js/bootstrap-datetimepicker.min.js"></script>
     <script src="../js/script.js"></script>
     
   </body>
