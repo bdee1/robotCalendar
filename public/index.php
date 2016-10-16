@@ -4,7 +4,7 @@
 	require_once ("../includes/dBug.php");
 	$qryRobots = $utils->getRobotTypes();
 	session_start();
-	
+
 ?>
 
 <html lang="en">
@@ -12,10 +12,8 @@
     <meta charset="utf-8">
     <title>Robot Reservation Calendar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-    
     <link href="css/style.css" rel="stylesheet">
     <link href="css/fullCalendar/fullcalendar.css" rel="stylesheet">
   </head>
@@ -32,7 +30,6 @@
       </div>
       <!-- Responsive calendar - END -->
     </div>
-    
     <!-- bootstrap modal for clicked calendar events -->
     <div class="modal fade" id="eventModal" tabindex="-1" role="dialog">
 	  <div class="modal-dialog" role="document">
@@ -77,12 +74,12 @@
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-    
+
     <h2 class="text-center key-heading">Key</h2>
     <div class="container key-container">
 	    <div class="row key-row">
-	    <?php 
-		//loop over the database values 
+	    <?php
+		//loop over the database values
 			while ($row = mysqli_fetch_assoc($qryRobots)) {
 			?>
 				<div class="col-xs-1 key-color" style="background-color: <?php echo $row["color"];?>">
@@ -91,7 +88,7 @@
 				<div class="col-sm-2 col-xs-11 key-label">
 					<?php echo $row["title"];?>
 				</div>
-				
+
 			<?php
 			}
 		?>
@@ -99,15 +96,15 @@
     </div>
     <div class="text-center">
 	    <br>
-		<a href="admin/admin.php">Admin</a>    
+		<a href="admin/admin.php">Admin</a>
     </div>
-    
+
     <script src="js/jquery.js"></script>
     <script src="js/fullCalendar/moment.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/fullCalendar/fullcalendar.min.js"></script>
     <script src="https://use.fontawesome.com/ee44f3c44e.js"></script>
     <script src="js/script.js"></script>
-    
+
   </body>
 </html>
