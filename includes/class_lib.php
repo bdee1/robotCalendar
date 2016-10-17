@@ -2,13 +2,38 @@
 	if ( !class_exists( "utils" ) )
 	{
 		class utils {
-			var $dbhost = "localhost";
-			var $dbuser = "robots";
-			var $dbpass = "robots";
-			var $dbname = "robotCalendar";
-			
+			var $dbhost = "";
+			var $dbuser = "";
+			var $dbpass = "";
+			var $dbname = "";
+
 			var $errors = array();
-			
+
+			/*
+			*  __construct
+			*
+			*  constructor function
+			*
+			*  @param	N/A
+			*  @return	N/A
+			*/
+			//
+			function __construct() {
+				//if we are on localhost, use the local db credentials, otherwise use the live db credentials
+				if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+					$this->dbhost = "localhost";
+					$this->dbuser = "robots";
+					$this->dbpass = "robots";
+					$this->dbname = "robotCalendar";
+				} else {
+					$this->dbhost = "localhost";
+					$this->dbuser = "bdee1_m5r0b01";
+					$this->dbpass = "RMD9NFqxvjXF9K";
+					$this->dbname = "bdee1_robots";
+				}
+
+			}
+
 			/*
 			*  db_connect
 			*
@@ -19,20 +44,21 @@
 			*/
 			//
 			function db_connect() {
-				//connect to the database 
+				//connect to the database
+
 				$conn = mysqli_connect($this->dbhost, $this->dbuser, $this->dbpass, $this->dbname);
-				
+
 				//Test the db connection
 				if (mysqli_connect_errno()) {
-					die("Database connection failed: " . 
-						mysqli_connect_error() . 
+					die("Database connection failed: " .
+						mysqli_connect_error() .
 						" (" . mysql_connect_errno() . ")"
 					);
 					echo 'failed';
 				}
 				return $conn;
 			}
-			
+
 			/*
 			*  db_close
 			*
@@ -46,7 +72,7 @@
 				//close db connection
 				mysqli_close($conn);
 			}
-			
+
 			/*
 			*  getRequests
 			*
@@ -58,9 +84,9 @@
 			//
 			function getRequests ($id = 0)
 			{
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				//build the query
 				$qry = "SELECT rq.id, rq.requestor, rq.email, rq.gradeLevel, rq.district, rq.start_date, rq.end_date, rq.robotID, rb.title as robot, approved ";
 				$qry .= "FROM tbl_requests rq ";
@@ -70,21 +96,21 @@
 					$qry .= "WHERE rq.id = " . $id;
 				}
 				$qry .= " ORDER BY start_date";
-				
+
 				$result = mysqli_query($conn, $qry);
-				
+
 				//close db connection
 				$this->db_close($conn);
-				
+
 				if (!$result) {
 					echo 'Error executing query for robot requests';
 					return null;
 				} else {
 					return $result;
 				}
-				
+
 			} // End Method getRobotTypes
-			
+
 			/*
 			*  getRobotTypes
 			*
@@ -96,32 +122,32 @@
 			//
 			function getRobotTypes ($id = 0)
 			{
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				//build the query
 				$qry = "SELECT id, title, description, color ";
 				$qry .= "FROM tbl_robots ";
 				if ($id > 0) {
-					$qry .= "WHERE id = " . $id;	
+					$qry .= "WHERE id = " . $id;
 				}
 				$qry .= " ORDER BY title";
-				
+
 				$result = mysqli_query($conn, $qry);
-				
+
 				//close db connection
 				$this->db_close($conn);
-				
+
 				if (!$result) {
 					echo 'Error executing query';
 					return null;
 				} else {
 					return $result;
 				}
-				
+
 			} // End Method getRobotTypes
-			
-			
+
+
 			/*
 			*  getEventsJSON
 			*
@@ -135,30 +161,30 @@
 			function getEventsJSON ($start, $end)
 			{
 				$start = (empty($start))?date('Y-m-01 00:00:00', strtotime('today midnight')):$start;
-				$end   = (empty($end))?date('Y-m-t  00:00:00'):$end; 
-				
-				//connect to the database 
+				$end   = (empty($end))?date('Y-m-t  00:00:00'):$end;
+
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				//build the query
-				$qry = "SELECT rq.id, rq.requestor, rq.gradeLevel, rq.district, rq.start_date, rq.end_date, rq.robotID, rb.title, rb.color, rq.approved ";
+				$qry = "SELECT rq.id, rq.requestor, rq.gradeLevel, rq.district, rq.start_date, DATE_ADD(rq.end_date, INTERVAL 1 DAY) AS end_date, rq.robotID, rb.title, rb.color, rq.approved ";
 				$qry .= "FROM tbl_requests rq ";
 				$qry .= "INNER JOIN tbl_robots rb ";
 				$qry .= "ON rb.id = rq.robotID ";
 				$qry .= "WHERE rq.approved = 1 ";
 				$qry .= "AND rq.start_date BETWEEN '" . $start. "' AND '" . $end . "'";
-				
+
 				//echo $qry;
-				
+
 				$result = mysqli_query($conn, $qry);
 				if (!$result) {
 					die("Database query failed.");
 				}
-				
+
 				$eventData = "";
-				
+
 				$arrevents = array();
-				
+
 				while ($row = mysqli_fetch_assoc($result)) {
 					$arrevent = array("title"=>$row["district"] . ": " . $row["title"],
 										"start"=>$row["start_date"],
@@ -170,18 +196,18 @@
 										"gradeLevel"=>$row["gradeLevel"],
 										"robot"=>$row["title"],
 										"eventid"=>$row["id"]);
-					
-					$arrevents[] = $arrevent;	
+
+					$arrevents[] = $arrevent;
 				}
-				
+
 				$eventData = json_encode($arrevents);
-				
+
 				//close db connection
 				$this->db_close($conn);
-				
+
 				return $eventData;
 			}
-			
+
 			/*
 			*  insertRobotRequest
 			*
@@ -193,36 +219,36 @@
 			//
 			function insertRobotRequest ($post)
 			{
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				$requestor = mysqli_real_escape_string($conn, $post['name']);
 				$email = mysqli_real_escape_string($conn, $post['email']);
 				$gradeLevel = mysqli_real_escape_string($conn, $post['gradeLevel']);
 				$district = mysqli_real_escape_string($conn, $post['district']);
-				
+
 				$start_date = mysqli_real_escape_string($conn, date("Y-m-d H:i:s", strtotime($post['start_date'])));
 				if (empty($post['end_date'])) {
 					$end_date = $start_date;
 				} else {
-					$end_date = mysqli_real_escape_string($conn, date("Y-m-d H:i:s", strtotime($post['end_date'])));	
+					$end_date = mysqli_real_escape_string($conn, date("Y-m-d H:i:s", strtotime($post['end_date'])));
 				}
 				//$start_date = mysqli_real_escape_string($conn, $post['start_date']);
-				
-				
+
+
 				//build the query
 				$qry = "INSERT INTO tbl_requests(requestor, email, gradeLevel, district, start_date, end_date, robotID, approved) ";
 				$qry .= "VALUES( '{$requestor}', '{$email}', '{$gradeLevel}', '{$district}', '{$start_date}', '{$end_date}', {$post['robot']}, 0)";
-				
-				
+
+
 				//execute the query
 				$result = mysqli_query($conn, $qry);
 				if (!$result) {
 					die("Database query failed.");
 				}
 			}
-			
-			
+
+
 			/*
 			*  approveRequest
 			*
@@ -235,25 +261,25 @@
 			//
 			function approveRequest ($id, $approved)
 			{
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				$id = mysqli_real_escape_string($conn, $id);
 				$approved = mysqli_real_escape_string($conn, $approved);
-				
+
 				//build the query
 				$qry = "UPDATE tbl_requests ";
 				$qry .= "SET approved = '{$approved}' ";
 				$qry .= "WHERE id = {$id}";
-				
-				
+
+
 				//execute the query
 				$result = mysqli_query($conn, $qry);
 				if (!$result) {
 					die("Database query failed.");
 				}
 			}
-			
+
 			/*
 			*  updateRobotRequest
 			*
@@ -265,9 +291,9 @@
 			//
 			function updateRobotRequest ($post)
 			{
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				$id = mysqli_real_escape_string($conn, $post['id']);
 				$name = mysqli_real_escape_string($conn, $post['name']);
 				$email = mysqli_real_escape_string($conn, $post['email']);
@@ -277,11 +303,11 @@
 				if (empty($post['end_date'])) {
 					$end_date = $start_date;
 				} else {
-					$end_date = mysqli_real_escape_string($conn, date("Y-m-d H:i:s", strtotime($post['end_date'])));	
+					$end_date = mysqli_real_escape_string($conn, date("Y-m-d H:i:s", strtotime($post['end_date'])));
 				}
 				$robot = mysqli_real_escape_string($conn, $post['robot']);
 				$approved = mysqli_real_escape_string($conn, $post['approved']);
-				
+
 				//build the query
 				$qry = "UPDATE tbl_requests ";
 				$qry .= "SET requestor = '{$name}', ";
@@ -293,15 +319,15 @@
 				$qry .= "robotID = '{$robot}', ";
 				$qry .= "approved = '{$approved}' ";
 				$qry .= "WHERE id = {$id}";
-				
-				
+
+
 				//execute the query
 				$result = mysqli_query($conn, $qry);
 				if (!$result) {
 					die("Database query failed.");
 				}
 			}
-			
+
 			/*
 			*  updateRobot
 			*
@@ -313,30 +339,30 @@
 			//
 			function updateRobot ($post)
 			{
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				$id = mysqli_real_escape_string($conn, $post['id']);
 				$title = mysqli_real_escape_string($conn, $post['title']);
 				$description = mysqli_real_escape_string($conn, $post['description']);
 				$color = mysqli_real_escape_string($conn, $post['color']);
-				
+
 				//build the query
 				$qry = "UPDATE tbl_robots ";
 				$qry .= "SET title = '{$title}', ";
 				$qry .= "description = '{$description}', ";
 				$qry .= "color = '{$color}' ";
 				$qry .= "WHERE id = {$id}";
-				
-				
-				
+
+
+
 				//execute the query
 				$result = mysqli_query($conn, $qry);
 				if (!$result) {
 					die("Database query failed.");
 				}
 			}
-			
+
 			/*
 			*  insertRobot
 			*
@@ -348,25 +374,25 @@
 			//
 			function insertRobot ($post)
 			{
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				$title = mysqli_real_escape_string($conn, $post['title']);
 				$description = mysqli_real_escape_string($conn, $post['description']);
 				$color = mysqli_real_escape_string($conn, $post['color']);
-				
+
 				//build the query
 				$qry = "INSERT INTO tbl_robots(title, description, color) ";
 				$qry .= "VALUES( '{$title}', '{$description}', '{$color}' )";
-				
-				
+
+
 				//execute the query
 				$result = mysqli_query($conn, $qry);
 				if (!$result) {
 					die("Database query failed.");
 				}
 			}
-			
+
 			/*
 			*  deleteRobot
 			*
@@ -378,17 +404,17 @@
 			//
 			function deleteRobot ($id)
 			{
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				$id = mysqli_real_escape_string($conn, $id);
-				
+
 				//build the query
 				$qry = "DELETE FROM tbl_robots ";
 				$qry .= "WHERE( id = {$id} )"  ;
-				
-				echo $qry; 
-				
+
+				echo $qry;
+
 				//execute the query
 				$result = mysqli_query($conn, $qry);
 				if (!$result) {
@@ -398,7 +424,7 @@
 					return mysqli_affected_rows($conn);
 				}
 			}
-			
+
 			/*
 			*  deleteRobotRequest
 			*
@@ -410,17 +436,17 @@
 			//
 			function deleteRobotRequest ($id)
 			{
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				$id = mysqli_real_escape_string($conn, $id);
-				
+
 				//build the query
 				$qry = "DELETE FROM tbl_requests ";
 				$qry .= "WHERE( id = {$id} )"  ;
-				
-				echo $qry; 
-				
+
+				echo $qry;
+
 				//execute the query
 				$result = mysqli_query($conn, $qry);
 				if (!$result) {
@@ -430,7 +456,7 @@
 					return mysqli_affected_rows($conn);
 				}
 			}
-			
+
 			/*
 			*  redirect_to
 			*
@@ -444,7 +470,7 @@
 				header('Location:'.$location);
 				exit;
 			}
-			
+
 			/*
 			*  validate_required
 			*
@@ -462,7 +488,7 @@
 					}
 				}
 			}
-			
+
 			/*
 			*  validate_honeypot
 			*
@@ -478,7 +504,7 @@
 					$this->errors[$field] = "Sorry the form could not be submitted at this time";
 				}
 			}
-			
+
 			/*
 			*  form_errors
 			*
@@ -504,8 +530,8 @@
 				}
 				return $output;
 			}
-			
-			
+
+
 			/*
 			*  find_admin_by_username
 			*
@@ -516,35 +542,35 @@
 			*/
 			//
 			function find_admin_by_username ($username) {
-				//connect to the database 
+				//connect to the database
 				$conn = $this->db_connect();
-				
+
 				$safe_username = mysqli_real_escape_string($conn, $username);
-				
+
 				//build the query
 				$qry = "SELECT id, name, username, password ";
 				$qry .= "FROM tbl_users ";
 				$qry .= "WHERE username = '{$safe_username}' ";
 				$qry .= "LIMIT 1 ";
-				
+
 				$result = mysqli_query($conn, $qry);
-				
+
 				if (!$result) {
 					die("Database query failed while finding admin by username");
 				}
-				
+
 				if ($admin = mysqli_fetch_assoc($result)) {
 					return $admin;
 				} else {
 					return null;
 				}
-				
+
 				//close db connection
 				$this->db_close($conn);
-				
+
 				return $result;
 			}
-			
+
 			/*
 			*  password_check
 			*
@@ -562,7 +588,7 @@
 					return false;
 				}
 			}
-			
+
 			/*
 			*  attempt_login
 			*
@@ -583,11 +609,11 @@
 						return false;
 					}
 				} else {
-					//admin user not found 
+					//admin user not found
 					return false;
 				}
 			}
-			
+
 			/*
 			*  confirm_logged_in
 			*
@@ -602,10 +628,10 @@
 					$this->redirect_to("login.php");
 				}
 			}
-			
+
 		}// End Class
 	}// End If
-	
+
 // Instantiating the Class
 if (class_exists("utils")) {
 	$utils = new utils();

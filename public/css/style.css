@@ -50,7 +50,7 @@ ul.admin-nav i.fa {
 
 /*tablet and desktop styles*/
 @media (min-width: 415px) {
-	.key-color, .key-label { margin-bottom: initial;}
+	/*.key-color, .key-label { margin-bottom: initial;}*/
 	.key-heading { border: none; padding: initial; }
 	.container { padding: 1.5em; border-radius: 10px; }
 	body { background-color: #8499b8; }
