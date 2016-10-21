@@ -20,7 +20,7 @@
 			//
 			function __construct() {
 				//if we are on localhost, use the local db credentials, otherwise use the live db credentials
-				if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1') {
+				if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['REMOTE_ADDR'] == '::1') {
 					$this->dbhost = "localhost";
 					$this->dbuser = "robots";
 					$this->dbpass = "robots";

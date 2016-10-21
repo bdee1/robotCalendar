@@ -20,9 +20,16 @@
   <body>
     <div class="text-center cal-header">
 	    <h1>Robots Reservation Calendar</h1>
-		<a href="request.php" class="btn btn-danger">
-			<i class="fa fa-user-plus" aria-hidden="true"></i>Request a Robot for your district
-		</a>
+			<?php
+					//make sure the user is logged in
+					if (isset($_SESSION['admin_id'])) {
+			?>
+				<a href="request.php" class="btn btn-danger">
+					<i class="fa fa-user-plus" aria-hidden="true"></i>Request a Robot for your district
+				</a>
+			<?php
+				}
+			?>
     </div>
     <div class="container calendar-container">
       <!-- Responsive calendar - START -->
