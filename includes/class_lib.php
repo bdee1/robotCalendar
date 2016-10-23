@@ -171,7 +171,7 @@
 				$qry .= "FROM tbl_requests rq ";
 				$qry .= "INNER JOIN tbl_robots rb ";
 				$qry .= "ON rb.id = rq.robotID ";
-				$qry .= "WHERE rq.approved = 1 ";
+				//$qry .= "WHERE rq.approved = 1 ";
 				$qry .= "AND rq.start_date BETWEEN '" . $start. "' AND '" . $end . "'";
 
 				//echo $qry;

@@ -5,7 +5,7 @@ $(document).ready(function() {
 	        // put your options and callbacks here
 	        editable: false,
 	        events: 'eventsjson.php',
-	        eventClick: function(calEvent, jsEvent, view) {
+	        /*eventClick: function(calEvent, jsEvent, view) {
 		        calEvent.start = calEvent.start.format('MM/DD/YYYY');
 		        if (calEvent.end) {
 			        calEvent.end = calEvent.end.format('MM/DD/YYYY');
@@ -25,7 +25,7 @@ $(document).ready(function() {
 		    	$('#eventModal #eventModalEdit').attr("href", "./admin/edit_request.php?id="+calEvent.eventid);
 		    	$('#eventModal').modal('show');
 		    	//alert(calEvent.title);
-	        }
+				}*/
 	    });
     }
 
