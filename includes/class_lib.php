@@ -237,14 +237,26 @@
 
 
 				//build the query
+				//loop over the submitted robot values and insert one event for each chosen robot.
 				$qry = "INSERT INTO tbl_requests(requestor, email, gradeLevel, district, start_date, end_date, robotID, approved) ";
-				$qry .= "VALUES( '{$requestor}', '{$email}', '{$gradeLevel}', '{$district}', '{$start_date}', '{$end_date}', {$post['robot']}, 0)";
-
+				$qryvalues = "";
+				foreach ($post['robot'] as $robot) {
+					if (! empty($qryvalues)) {
+						$qryvalues .= ",";
+					} else {
+						$qryvalues .= "VALUES ";
+					}
+					$qryvalues .= " ( '{$requestor}', '{$email}', '{$gradeLevel}', '{$district}', '{$start_date}', '{$end_date}', {$robot}, 0) ";
+				}
+				$qry = $qry . $qryvalues;
+				
 
 				//execute the query
-				$result = mysqli_query($conn, $qry);
-				if (!$result) {
-					die("Database query failed.");
+				if (!empty($qry)) {
+					$result = mysqli_query($conn, $qry);
+					if (!$result) {
+						die("Database query failed.");
+					}
 				}
 			}
 
