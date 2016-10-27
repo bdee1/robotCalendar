@@ -106,12 +106,22 @@
 		<a href="admin/admin.php">Admin</a>
     </div>
 
+		<?php
+			//make sure the user is logged in
+			if (isset($_SESSION['admin_id'])) {
+				$eventScript = "scriptEventsAdmin.js";
+			} else {
+				$eventScript = "scriptEvents.js";
+			}
+		?>
+
     <script src="js/jquery.js"></script>
     <script src="js/fullCalendar/moment.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/fullCalendar/fullcalendar.min.js"></script>
     <script src="https://use.fontawesome.com/ee44f3c44e.js"></script>
     <script src="js/script.js"></script>
+		<script src="js/<?php echo $eventScript; ?>"></script>
 
   </body>
 </html>
