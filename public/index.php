@@ -38,7 +38,7 @@
       <!-- Responsive calendar - END -->
     </div>
     <!-- bootstrap modal for clicked calendar events -->
-    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" style="display:none;">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
