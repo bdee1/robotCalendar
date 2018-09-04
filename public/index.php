@@ -10,7 +10,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Robot Reservation Calendar</title>
+    <title>Model Schools Equipment Availability</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -19,7 +19,7 @@
   </head>
   <body>
     <div class="text-center cal-header">
-	    <h1>Robots Reservation Calendar</h1>
+	    <!--<h1>Model Schools Equipment Availability</h1>-->
 			<?php
 					//make sure the user is logged in
 					if (isset($_SESSION['admin_id'])) {
