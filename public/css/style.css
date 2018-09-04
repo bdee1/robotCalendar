@@ -3,7 +3,7 @@ h2 { font-size: 24px; }
 
 i.fa { margin-right: 10px; }
 .bold {font-weight: bold;}
-.key-heading { border-bottom: 1px solid #000; padding-bottom: .5em;}
+.key-heading { border-bottom: 1px solid #000; padding-bottom: .5em; color: #fff;}
 
 .calendar-container { padding-top: .75em; }
 
@@ -53,7 +53,7 @@ ul.admin-nav i.fa {
 	/*.key-color, .key-label { margin-bottom: initial;}*/
 	.key-heading { border: none; padding: initial; }
 	.container { padding: 1.5em; border-radius: 10px; }
-	body { background-color: #8499b8; }
+	body { background-color: #444444; }
 	a {color: #d3e047;}
 	h1 { color: #fff; font-size: 36px; border: none; }
 	h2 { font-size: 30px; }
