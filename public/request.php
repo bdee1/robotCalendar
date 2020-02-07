@@ -89,6 +89,21 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
+							<label for="robot">Robot Type</label>
+							<select class="form-control" name="robot[]" id="robot" multiple="multiple">
+								<option value="">Choose a Robot</option>
+								<?php
+								//loop over the database values
+								while ($row = mysqli_fetch_assoc($qryRobots)) {
+								?>
+									<option value="<?php echo $row["id"];?>" <?php echo $robotType == $row["id"]?' selected="selected"':''; ?>><?php echo $row["title"];?></option>
+								<?php
+								}
+								?>
+							</select>
+						</div>
+						<!--
+						<div class="form-group">
 							<label for="gradeLevel">Grade Level</label>
 							<select class="form-control" name="gradeLevel" id="gradeLevel">
 								<option value="k" <?php echo $gradeLevel == 'k'?' selected="selected"':''; ?>>K</option>
@@ -101,6 +116,7 @@
 							?>
 							</select>
 						</div>
+						-->
 					</div>
 				</div>
 
@@ -121,20 +137,7 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label for="robot">Robot Type</label>
-					<select class="form-control" name="robot[]" id="robot" multiple="multiple">
-						<option value="">Choose a Robot</option>
-						<?php
-						//loop over the database values
-						while ($row = mysqli_fetch_assoc($qryRobots)) {
-						?>
-							<option value="<?php echo $row["id"];?>" <?php echo $robotType == $row["id"]?' selected="selected"':''; ?>><?php echo $row["title"];?></option>
-						<?php
-						}
-						?>
-					</select>
-				</div>
+
 
 				<div class="form-group form-test">
 					<label for="lname">Last Name</label>

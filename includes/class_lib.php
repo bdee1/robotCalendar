@@ -29,7 +29,7 @@
 					$this->dbhost = "localhost";
 					$this->dbuser = "bdee1_m5r0b01";
 					$this->dbpass = "RMD9NFqxvjXF9K";
-					$this->dbname = "bdee1_robots";
+					$this->dbname = "bdee1_RobotsExp";
 				}
 
 			}
@@ -194,7 +194,7 @@
 				$arrevents = array();
 
 				while ($row = mysqli_fetch_assoc($result)) {
-					$arrevent = array("title"=>$row["district"] . ": " . $row["title"],
+					$arrevent = array("title"=>$row["title"],
 										"start"=>$row["start_date"],
 										"end"=>$row["end_date"],
 										"color"=>$row["color"],
@@ -465,7 +465,7 @@
 				$qry = "DELETE FROM tbl_requests ";
 				$qry .= "WHERE( id = {$id} )"  ;
 
-				echo $qry;
+				//echo $qry;
 
 				//execute the query
 				$result = mysqli_query($conn, $qry);
