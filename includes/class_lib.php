@@ -172,7 +172,15 @@
 				$qry .= "INNER JOIN tbl_robots rb ";
 				$qry .= "ON rb.id = rq.robotID ";
 				//$qry .= "WHERE rq.approved = 1 ";
-				$qry .= "AND rq.start_date BETWEEN '" . $start. "' AND '" . $end . "'";
+				$qry .= "WHERE 1 = 1 ";
+				$qry .= "AND (";
+				$qry .= "(rq.start_date BETWEEN '" . $start. "' AND '" . $end . "')";
+				$qry .= " OR (rq.end_date BETWEEN '" . $start. "' AND '" . $end . "')";
+				$qry .= " OR (";
+				$qry .= " rq.start_date < '" . $start . "'";
+				$qry .= " AND rq.end_date > '" . $end . "'";
+				$qry .= ")";
+				$qry .= ") ";
 
 				//echo $qry;
 
@@ -249,7 +257,7 @@
 					$qryvalues .= " ( '{$requestor}', '{$email}', '{$gradeLevel}', '{$district}', '{$start_date}', '{$end_date}', {$robot}, 0) ";
 				}
 				$qry = $qry . $qryvalues;
-				
+
 
 				//execute the query
 				if (!empty($qry)) {

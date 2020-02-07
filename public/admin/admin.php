@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<?php
+<?php 
+	session_start(); 
 	require_once ("../../includes/class_lib.php");
-	session_start();
 	
 	//make sure the user is logged in
 	$utils->confirm_logged_in();
-	
 ?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
 	<script src="https://use.fontawesome.com/ee44f3c44e.js"></script>

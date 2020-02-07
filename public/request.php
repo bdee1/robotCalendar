@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 	require_once ("../includes/class_lib.php");
 	$qryRobots = $utils->getRobotTypes();
@@ -39,6 +38,7 @@
 		}
 	}
 ?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 	require_once ("../includes/class_lib.php");
 	require_once ("../includes/dBug.php");
@@ -6,7 +5,7 @@
 	session_start();
 
 ?>
-
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
