@@ -48,7 +48,7 @@
 
 
 		//validations
-		$required_fields = array("name", "email", "district", "start_date", "robot");
+		$required_fields = array("name", "district", "start_date", "robot");
 		$utils->validate_required($required_fields);
 
 		if (empty($utils->errors)) {
