@@ -4,7 +4,8 @@ $(document).ready(function() {
 	    $('.responsive-calendar').fullCalendar({
 	        // put your options and callbacks here
 	        editable: false,
-	        events: 'eventsjson.php',
+			events: 'eventsjson.php',
+			weekends: false
 	    });
     }
 
@@ -12,11 +13,12 @@ $(document).ready(function() {
     if (jQuery().datetimepicker) {
 	    //initialize the datepickers
 	    $('.datetimepicker').datetimepicker({
-		    format: 'L',
+			format: 'L',
+			viewMode: 'months',
 		    widgetPositioning: {
 			    horizontal: 'auto',
-			    vertical: 'top'
-		    }
+				vertical: 'top',
+			}
 	    });
 	}
 });

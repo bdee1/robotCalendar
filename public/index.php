@@ -57,10 +57,12 @@
 		        <span class="bold">District: </span>
 		        <span id="eventModalDistrict"></span>
 	        </p>
-	        <p>
-		        <span class="bold">Grade Level: </span>
-		        <span id="eventModalGradeLevel"></span>
-	        </p>
+	        <!--
+				<p>
+					<span class="bold">Grade Level: </span>
+					<span id="eventModalGradeLevel"></span>
+				</p>
+			-->
 	        <p>
 		        <span class="bold">Robot: </span>
 		        <span id="eventModalRobot"></span>
