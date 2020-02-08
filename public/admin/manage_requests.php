@@ -29,7 +29,7 @@
     </div>
     <div class="container">
 		<div class="breadcrumb">
-			<a href="admin.php">Admin Dashboard</a>
+			<a href="admin.php">Admin Dashboard</a> | <a href="../index.php">View Calendar</a>
 		</div>
 
 		<a class="btn btn-primary" href="../request.php">Add New Request</a><br>

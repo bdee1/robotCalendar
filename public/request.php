@@ -27,7 +27,7 @@
 
 
 		//validations
-		$required_fields = array("name", "email", "district", "start_date");
+		$required_fields = array("name", "district", "start_date");
 		$utils->validate_required($required_fields);
 		$utils->validate_honeypot('lname');
 

@@ -4,7 +4,8 @@ $(document).ready(function() {
 	    $('.responsive-calendar').fullCalendar({
 	        // put your options and callbacks here
 	        editable: false,
-	        events: 'eventsjson.php',
+			events: 'eventsjson.php',
+			weekends: false,
 	        eventClick: function(calEvent, jsEvent, view) {
 		        calEvent.start = calEvent.start.format('MM/DD/YYYY');
 		        if (calEvent.end) {
